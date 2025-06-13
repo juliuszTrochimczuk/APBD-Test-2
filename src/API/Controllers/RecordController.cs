@@ -35,11 +35,16 @@ public class RecordController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddRecord(CreateRecordRequestBody body)
+    public async Task<IActionResult> AddRecord([FromBody] CreateRecordRequestBody body)
     {
         try
         {
-            return Created();
+            var result = await service.CreateNewRecordAsync(body);
+            return Created("/created-record/" + result.Id, result);
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return BadRequest(ex.Message);
         }
         catch (ArgumentException ex)
         {

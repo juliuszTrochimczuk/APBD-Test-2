@@ -6,4 +6,5 @@ public interface IRecordService
 {
     Task<IEnumerable<RecordInfoResponseBody>> GetAllRecordsAsync(string filteredBy);
     Task<IEnumerable<RecordInfoResponseBody>> GetAllRecordsAsync();
+    Task<RecordInfoResponseBody> CreateNewRecordAsync(CreateRecordRequestBody body);
 }
